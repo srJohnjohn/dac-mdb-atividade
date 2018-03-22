@@ -36,7 +36,7 @@ import javax.jms.Topic;
             @ActivationConfigProperty(propertyName = "destinationType",
                     propertyValue = "javax.jms.Topic"),
             @ActivationConfigProperty(propertyName = "destinationName",
-                    propertyValue = "confirmacao"),
+                    propertyValue = "compras"),
             @ActivationConfigProperty(propertyName = "messageSelector",
                     propertyValue = "categoria='sms'")
         } )

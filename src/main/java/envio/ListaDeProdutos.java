@@ -22,19 +22,25 @@ import javax.inject.Singleton;
 public class ListaDeProdutos {
     
     private List<Produto> produtos = new ArrayList<>();
-     
-    public List<Produto> list(){
+
+    public List<Produto> getProdutos() {
         return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
     
     @PostConstruct
     public void itens(){
-        BigDecimal banana = new BigDecimal("2,5");
+        BigDecimal banana = new BigDecimal("2.5");
         produtos.add(new Produto("banana", banana));
-        BigDecimal maca = new BigDecimal("5,0");
+        BigDecimal maca = new BigDecimal("5.0");
         produtos.add(new Produto("maca", maca));
-        BigDecimal melancia = new BigDecimal("7,5");
+        BigDecimal melancia = new BigDecimal("7.5");
         produtos.add(new Produto("maca", melancia));
     }
+    
+    
     
 }

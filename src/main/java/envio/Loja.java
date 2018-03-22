@@ -38,6 +38,7 @@ public class Loja {
     private List<Produto> carrinho = new ArrayList<>();
     private long cartao;
     private Cliente cliente = new Cliente("meireles", "meirelesqqq");
+    private Produto produto = new Produto();
 
     @Resource(lookup = "java:global/jms/Compras")
     private Topic topic;
@@ -81,11 +82,15 @@ public class Loja {
     }
 
     public String adicionaproduto(Produto pro){
+        Logger.getGlobal().log(Level.INFO, "produtoadicionado", "aaa");
         carrinho.add(pro);
-        return "inde.xhtml";
+        System.out.println(carrinho);
+        return "index.xhtml";
     }
 
     public String removerProduto(Produto pro){
+        Logger.getGlobal().log(Level.INFO, "produtoadicionado", "aaa");
+
         carrinho.remove(pro);
         return "index.xhtml";
     }

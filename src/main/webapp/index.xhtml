@@ -12,15 +12,27 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <div>TODO write content</div>
-        <h:dataTable var="produto" value="#{listaDeProdutos.list()}">
-            <h:column> #{produto.descricao} </h:column>
-            <h:column> #{produto.preco} </h:column>
-            <h:column>
-                <h:form>
-                    <h:commandButton value="+" action="#{loja.adicionaproduto(produto)}"/>
-                </h:form>
-            </h:column>
-        </h:dataTable>
+        <h:form>
+            <h:dataTable var="produto" value="#{listaDeProdutos.produtos}">
+                <h:column> #{produto.descricao} </h:column>
+                <h:column> #{produto.preco} </h:column>
+                <h:column>
+                    <h:form>
+                        <h:commandButton value="+" action="#{loja.adicionaproduto(produto)}"/>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+            <h:dataTable var="produto" value="#{loja.carrinho}">
+                <h:column> #{produto.descricao} </h:column>
+                <h:column> #{produto.preco} </h:column>
+                <h:column>
+                    <h:form>
+                        <h:commandButton value="+" action="#{loja.removerProduto(produto)}"/>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="finalizar pedido" action="#{loja.finalizarPedido()}" />
+            
+        </h:form>
     </h:body>
 </html>
