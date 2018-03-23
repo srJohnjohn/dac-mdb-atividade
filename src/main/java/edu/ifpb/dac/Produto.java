@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * @author Ricardo Job
  */
 @Entity
-public class Produto implements Serializable {
+public class Produto implements Serializable, Comparable<Produto>{
 
     @Id
     private int id;
@@ -47,6 +47,11 @@ public class Produto implements Serializable {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    @Override
+    public int compareTo(Produto o) {
+        return this.descricao.compareTo(o.descricao);
     }
 
 }

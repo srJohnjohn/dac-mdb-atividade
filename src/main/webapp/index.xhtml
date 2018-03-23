@@ -13,26 +13,11 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable var="produto" value="#{listaDeProdutos.produtos}">
-                <h:column> #{produto.descricao} </h:column>
-                <h:column> #{produto.preco} </h:column>
-                <h:column>
-                    <h:form>
-                        <h:commandButton value="+" action="#{loja.adicionaproduto(produto)}"/>
-                    </h:form>
-                </h:column>
-            </h:dataTable>
-            <h:dataTable var="produto" value="#{loja.carrinho}">
-                <h:column> #{produto.descricao} </h:column>
-                <h:column> #{produto.preco} </h:column>
-                <h:column>
-                    <h:form>
-                        <h:commandButton value="+" action="#{loja.removerProduto(produto)}"/>
-                    </h:form>
-                </h:column>
-            </h:dataTable>
-            <h:commandButton value="finalizar pedido" action="#{loja.finalizarPedido()}" />
-            
+            <h1>Acesso ao sistema</h1>
+            <h:inputText binding="#{email}"/><br/>
+            <h:inputText binding="#{nome}" /> <br/>
+            <h:commandButton value="Login" action="#{clienteControlador.login(email.value, nome.value)}"/>
+            <h:commandButton value="Cadastrar" action="#{clienteControlador.cadastrar(email.value, nome.value)}"/>
         </h:form>
     </h:body>
 </html>

@@ -44,7 +44,7 @@ public class Loja {
     private Topic topic;
     @Inject
     private JMSContext context;
-    
+
     public Loja(){
         
     }
