@@ -18,11 +18,28 @@ and open the template in the editor.
             <h:outputText value="#{produtoControlador.vitrine.preco}" /><br/>
         </h:form>
         <h:form>
+            <h1>Cadastrar Produto</h1>
+            <h:inputText binding="#{descricao}"/><br/>
+            <h:inputText binding="#{preco}" /> <br/>
+            <h:commandButton value="Cadastrar" action="#{produtoControlador.cadastrarProduto(descricao.value, valor.value)}"/>
+        </h:form>
+        <h:form>
             <h:dataTable var="produto" value="#{produtoControlador.prateleireira}" >
                 <h:column>#{produto.descricao}</h:column>
                 <h:column>#{produto.preco}</h:column>
                 <h:column>
                     <h:commandButton value="+" action="#{pedidoControlador.addProduto(produto)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <br/>
+        <br/>
+        <h:form>
+            <h:dataTable var="produto" value="#{pedidoControlador.pedido.produtos}" >
+                <h:column>#{produto.descricao}</h:column>
+                <h:column>#{produto.preco}</h:column>
+                <h:column>
+                    <h:commandButton value="-" action="#{pedidoControlador.removeProduto(produto)}" />
                 </h:column>
             </h:dataTable>
         </h:form>

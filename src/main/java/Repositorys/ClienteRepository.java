@@ -7,7 +7,7 @@ package Repositorys;
 
 import edu.ifpb.dac.Cliente;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author recursive
  */
-@Stateless
+@RequestScoped
 public class ClienteRepository {
     
     @PersistenceContext

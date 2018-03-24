@@ -10,7 +10,7 @@ import edu.ifpb.dac.Cliente;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import recebimento.CardCredit;
@@ -20,7 +20,7 @@ import recebimento.CardCredit;
  * @author recursive
  */
 @Named
-@Stateful
+@SessionScoped
 public class ClienteControlador implements Serializable{
     
     private Cliente cliente;
@@ -44,7 +44,7 @@ public class ClienteControlador implements Serializable{
     }
     
     public String login(String nome, String email){
-        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", "Login");
+        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "UsuarioLogandoNoSistema");
         cliente = cr.buscarPorNome(nome);
         if(cliente != null){
             return "home.xhtml";
@@ -53,7 +53,7 @@ public class ClienteControlador implements Serializable{
     }
     
     public String cadastrar(String nome, String email){
-        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", "Cadastro");
+        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "CadastrarUsuario");
         Cliente cli = new Cliente(nome, email);
         cr.add(cli);
         return "index.xhtml";

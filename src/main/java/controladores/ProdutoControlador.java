@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import recebimento.CardCredit;
@@ -25,7 +25,7 @@ import recebimento.CardCredit;
  * @author recursive
  */
 @Named
-@Singleton
+@ApplicationScoped
 public class ProdutoControlador implements Serializable{
 
     private Produto vitrine;
@@ -67,7 +67,7 @@ public class ProdutoControlador implements Serializable{
     }
 
     public String cadastrarProduto(String descricao, String valor){
-        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", "cadastrar Produto");
+        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "CadastroProduto");
         BigDecimal preco = new BigDecimal(valor);
         Produto pro = new Produto(descricao, preco);
         pr.add(pro);
@@ -76,7 +76,7 @@ public class ProdutoControlador implements Serializable{
     }
     
     public String removerProduto(String nome){
-        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", "remover produto");
+        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "RemoverCadastro");
         Produto pro = pr.buscarPorNome(nome);
         pr.remove(pro);
         prateleireira = pr.list();
@@ -84,7 +84,7 @@ public class ProdutoControlador implements Serializable{
     }
     
     public String atualizarVitrine(){
-        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", "Vitrine");
+        Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "AtualizarVitrine");
         Collections.shuffle(prateleireira);
         vitrine = prateleireira.get(0);
         Collections.sort(prateleireira);
