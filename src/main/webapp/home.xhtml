@@ -12,36 +12,46 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <h1>Home</h1>
+        <h:outputText value=" Cliente #{pedidoControlador.cliente.nome}" />
         <h:form>
-            <h1>Home</h1>
-            <h:outputText value="#{produtoControlador.vitrine.descricao}" /><br/>
-            <h:outputText value="#{produtoControlador.vitrine.preco}" /><br/>
+            <h:commandButton value="Logout" action="#{clienteControlador.logout()}" />
         </h:form>
+        <h3>Vitrine</h3>
+        <h:outputText value="#{produtoControlador.vitrine.descricao}" /><br/>
+        <h:outputText value="#{produtoControlador.vitrine.preco}" /><br/>
         <h:form>
             <h1>Cadastrar Produto</h1>
-            <h:inputText binding="#{descricao}"/><br/>
-            <h:inputText binding="#{preco}" /> <br/>
-            <h:commandButton value="Cadastrar" action="#{produtoControlador.cadastrarProduto(descricao.value, valor.value)}"/>
+            <h:inputText value="#{produtoControlador.produto.descricao}"/><br/>
+            <h:inputText value="#{produtoControlador.preco}" /> <br/>
+            <h:commandButton value="Cadastrar" action="#{produtoControlador.cadastrarProduto()}"/>
         </h:form>
+        <br/>
+        <br/>
+        <h2>Prateleira</h2>
         <h:form>
             <h:dataTable var="produto" value="#{produtoControlador.prateleireira}" >
-                <h:column>#{produto.descricao}</h:column>
-                <h:column>#{produto.preco}</h:column>
+                <h:column><h:outputText value="#{produto.id}"/></h:column>
+                <h:column><h:outputText value="#{produto.descricao}"/></h:column>
+                <h:column><h:outputText value="#{produto.preco}"/></h:column>
                 <h:column>
-                    <h:commandButton value="+" action="#{pedidoControlador.addProduto(produto)}" />
+                    <h:commandButton value="+" action="#{carrinhoControlado.add(produto)}" />
                 </h:column>
             </h:dataTable>
         </h:form>
         <br/>
         <br/>
+        <h2>Carrinho</h2>
         <h:form>
-            <h:dataTable var="produto" value="#{pedidoControlador.pedido.produtos}" >
-                <h:column>#{produto.descricao}</h:column>
-                <h:column>#{produto.preco}</h:column>
+            <h:dataTable var="meuproduto" value="#{carrinhoControlado.produtos}" >
+                <h:column><h:outputText value="#{meuproduto.descricao}"/></h:column>
+                <h:column><h:outputText value="#{meuproduto.preco}"/></h:column>
                 <h:column>
-                    <h:commandButton value="-" action="#{pedidoControlador.removeProduto(produto)}" />
+                    <h:commandButton value="-" action="#{carrinhoControlado.remove(meuproduto)}" />
                 </h:column>
             </h:dataTable>
+            <h:outputText value="#{carrinhoControlado.bd}"/>
+            <h:commandButton value="Finalizar Compra" action="#{pedidoControlador.finalizarPedido()}"/>
         </h:form>
     </h:body>
 </html>

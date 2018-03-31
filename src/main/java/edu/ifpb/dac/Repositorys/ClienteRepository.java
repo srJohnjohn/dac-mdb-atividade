@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Repositorys;
+package edu.ifpb.dac.Repositorys;
 
-import edu.ifpb.dac.Cliente;
+import edu.ifpb.dac.entity.Cliente;
+import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,10 +16,10 @@ import javax.persistence.PersistenceContext;
  *
  * @author recursive
  */
-@RequestScoped
-public class ClienteRepository {
+@Stateless
+public class ClienteRepository implements Serializable{
     
-    @PersistenceContext
+    @PersistenceContext()
     private EntityManager em;
 
     public EntityManager getEm() {
@@ -53,7 +54,7 @@ public class ClienteRepository {
         List<Cliente> clientes = list();
         Cliente cli = null;
         for (Cliente cliente : clientes) {
-            if (cliente.getNome() == nome){
+            if (cliente.getNome() == null ? nome == null : cliente.getNome().equals(nome)){
                 cli = cliente;
             }
         }

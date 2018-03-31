@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recebimento;
+package edu.ifpb.dac.recebimento;
 
+import edu.ifpb.dac.entity.Pedido;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
@@ -23,18 +24,19 @@ import javax.jms.MessageListener;
             @ActivationConfigProperty(propertyName = "destinationType",
                     propertyValue = "javax.jms.Topic"),
             @ActivationConfigProperty(propertyName = "destinationName",
-                    propertyValue = "compras"),
-            @ActivationConfigProperty(propertyName = "messageSelector",
-                    propertyValue = "categoria='sms'")
-        } )
-@Stateless
-public class Email implements MessageListener{
+                    propertyValue = "compra")
+            
+        })
+public class EmailFinalizacao implements MessageListener{
+    
+    private EnviarEmail ee;
 
     @Override
     public void onMessage(Message message) {
         try {
-            String body = message.getBody(String.class);
-            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", body);
+            Pedido p = message.getBody(Pedido.class);
+            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem finalizada pelo cartão");
+            ee.send("Email enviado, pedido finalizado" + p.getValorTotal().toString());
         } catch (JMSException ex) {
             Logger.getLogger(CardCredit.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -14,10 +14,11 @@ and open the template in the editor.
     <h:body>
         <h:form>
             <h1>Acesso ao sistema</h1>
-            <h:inputText binding="#{email}"/><br/>
-            <h:inputText binding="#{nome}" /> <br/>
-            <h:commandButton value="Login" action="#{clienteControlador.login(email.value, nome.value)}"/>
-            <h:commandButton value="Cadastrar" action="#{clienteControlador.cadastrar(email.value, nome.value)}"/>
+            login: <h:inputText value="#{clienteControlador.cliente.nome}"/><br/>
+            email: <h:inputText value="#{clienteControlador.cliente.email}"/> <br/>
+            <h:commandButton value="Login" action="#{clienteControlador.login()}"/>
+            <h:commandButton value="Cadastrar" action="#{clienteControlador.cadastrar()}"/>
+            <h:outputText value="#{clienteControlador.mensagem}" />
         </h:form>
     </h:body>
 </html>

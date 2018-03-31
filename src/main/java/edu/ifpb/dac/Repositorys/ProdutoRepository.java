@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Repositorys;
+package edu.ifpb.dac.Repositorys;
 
-import edu.ifpb.dac.Produto;
+import edu.ifpb.dac.entity.Produto;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author recursive
  */
-@RequestScoped
+@Stateless
 public class ProdutoRepository {
     
     @PersistenceContext

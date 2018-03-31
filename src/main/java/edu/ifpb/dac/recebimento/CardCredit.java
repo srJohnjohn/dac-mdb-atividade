@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recebimento;
+package edu.ifpb.dac.recebimento;
 
+import edu.ifpb.dac.entity.Pedido;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -18,53 +19,41 @@ import javax.jms.JMSException;
 import javax.jms.JMSProducer;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.Queue;
 import javax.jms.Topic;
 
 /**
  *
  * @author recursive
  */
-//envia
-@JMSDestinationDefinition(
-        name = "java:global/jms/Conficamacao",
-        interfaceName = "javax.jms.Topic",
-        resourceAdapter = "jmsra",
-        destinationName = "confirmacao")
+
 //recebe
 @MessageDriven(mappedName = "java:global/jms/Compras",
         activationConfig ={
             @ActivationConfigProperty(propertyName = "destinationType",
                     propertyValue = "javax.jms.Topic"),
             @ActivationConfigProperty(propertyName = "destinationName",
-                    propertyValue = "compras"),
-            @ActivationConfigProperty(propertyName = "messageSelector",
-                    propertyValue = "categoria='sms'")
-        } )
-@Stateless
-public class CardCredit implements MessageListener{
+                    propertyValue = "compras")
+            
+        })
 
-    @Resource(lookup = "java:global/jms/Topic")
-    private Topic topic;
-    @Inject
-    private JMSContext context;
+public class CardCredit implements MessageListener{
+    
+    private EnviarConfimacao ec;
     
     @Override
     public void onMessage(Message message) {
         try {
-            String body = message.getBody(String.class);
-            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem recebida:{0} no sms", body);
-            confirmacao(body);
+            Pedido p = message.getBody(Pedido.class);
+            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Pedido recebido pelo cartão de credito");
+            confirmacao(p);
         } catch (JMSException ex) {
             Logger.getLogger(CardCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void confirmacao(String pedido){
-        JMSProducer createProducer = context.createProducer();
-        String enviar = pedido;
-        createProducer.setProperty("categoria", pedido)
-                .send(topic, enviar);
-        Logger.getGlobal().log(Level.INFO, "Mensagem enviada:{0}", enviar);
+    public void confirmacao(Pedido pedido){
+        ec.enviar(pedido);
     }
     
 }

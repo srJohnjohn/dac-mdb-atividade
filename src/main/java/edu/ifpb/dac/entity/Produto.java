@@ -1,8 +1,9 @@
-package edu.ifpb.dac;
+package edu.ifpb.dac.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 public class Produto implements Serializable, Comparable<Produto>{
 
     @Id
+    @GeneratedValue
     private int id;
     private String descricao;
     private BigDecimal preco;

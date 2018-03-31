@@ -1,4 +1,4 @@
-package edu.ifpb.dac;
+package edu.ifpb.dac.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
