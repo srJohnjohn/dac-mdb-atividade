@@ -34,13 +34,12 @@ public class EmailConfirmacao implements MessageListener{
     @Override
     public void onMessage(Message message) {
         try {
-            Pedido p  = message.getBody(Pedido.class);
-            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem confimada pelo cartão");
+            Pedido p = message.getBody(Pedido.class);
+            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Enviando Email de confirmacao");
             
-            ee.send("Email enviado, pedido confirmado" + p.getValorTotal().toString());
+            ee.send("Email enviado, pedido Confirmado" + p.getValorTotal().toString(), p.getCliente());
         } catch (JMSException ex) {
             Logger.getLogger(CardCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

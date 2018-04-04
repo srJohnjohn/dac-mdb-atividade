@@ -9,6 +9,7 @@ import edu.ifpb.dac.entity.Produto;
 import edu.ifpb.dac.service.CarrinhoService;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -67,6 +68,11 @@ public class CarrinhoControlado implements Serializable{
         bd = cs.valorPedido();
         produtos = cs.getProdutos();
         
+    }
+    
+    public String zerarCarrinho(){
+        this.produtos = new ArrayList<>();
+        return "home.xhtml?faces-redirect=true";
     }
     
 }

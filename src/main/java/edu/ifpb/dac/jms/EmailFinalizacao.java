@@ -36,8 +36,8 @@ public class EmailFinalizacao implements MessageListener{
     public void onMessage(Message message) {
         try {
             Pedido p = message.getBody(Pedido.class);
-            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Mensagem finalizada pelo cartão");
-            ee.send("Email enviado, pedido finalizado" + p.getValorTotal().toString());
+            Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Enviando Email de finalizacao");
+            ee.send("Email enviado, pedido finalizado" + p.getValorTotal().toString(), p.getCliente());
         } catch (JMSException ex) {
             Logger.getLogger(CardCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
