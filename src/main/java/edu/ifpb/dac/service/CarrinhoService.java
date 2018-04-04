@@ -6,7 +6,7 @@
 package edu.ifpb.dac.service;
 
 import edu.ifpb.dac.entity.Produto;
-import edu.ifpb.dac.recebimento.CardCredit;
+import edu.ifpb.dac.jms.CardCredit;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;

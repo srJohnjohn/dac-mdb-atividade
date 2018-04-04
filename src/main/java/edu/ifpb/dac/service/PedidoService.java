@@ -9,7 +9,7 @@ import edu.ifpb.dac.Repositorys.PedidoRepository;
 import edu.ifpb.dac.entity.Cliente;
 import edu.ifpb.dac.entity.Pedido;
 import edu.ifpb.dac.entity.Produto;
-import edu.ifpb.dac.recebimento.CardCredit;
+import edu.ifpb.dac.jms.CardCredit;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;

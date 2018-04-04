@@ -3,29 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.ifpb.dac.recebimento;
+package edu.ifpb.dac.jms;
 
 import edu.ifpb.dac.entity.Pedido;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.jms.JMSContext;
-import javax.jms.JMSDestinationDefinition;
 import javax.jms.JMSException;
-import javax.jms.JMSProducer;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.Queue;
-import javax.jms.Topic;
 
 /**
  *
  * @author recursive
  */
+//envia
 
 //recebe
 @MessageDriven(mappedName = "java:global/jms/Compras",
@@ -36,9 +30,9 @@ import javax.jms.Topic;
                     propertyValue = "compras")
             
         })
-
 public class CardCredit implements MessageListener{
     
+    @Inject
     private EnviarConfimacao ec;
     
     @Override
@@ -46,14 +40,14 @@ public class CardCredit implements MessageListener{
         try {
             Pedido p = message.getBody(Pedido.class);
             Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, "Pedido recebido pelo cartão de credito");
-            confirmacao(p);
+            if(p.getValorTotal().floatValue()> 66.0){
+                ec.enviar(p);
+            }
         } catch (JMSException ex) {
             Logger.getLogger(CardCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void confirmacao(Pedido pedido){
-        ec.enviar(pedido);
-    }
+    
     
 }

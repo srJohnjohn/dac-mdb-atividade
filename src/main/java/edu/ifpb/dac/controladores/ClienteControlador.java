@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Named;
-import edu.ifpb.dac.recebimento.CardCredit;
+import edu.ifpb.dac.jms.CardCredit;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -58,11 +58,14 @@ public class ClienteControlador implements Serializable{
     public String login(){
         Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, this.cliente.getNome());
         Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, this.cliente.getEmail());
+        String email = cliente.getEmail();
         this.cliente = cr.buscarPorNome(this.cliente.getNome());
-        if(cliente != null){
-            HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            sessao.setAttribute("cliente", cliente);
-            return "home.xhtml?faces-redirect=true";
+        if(this.cliente != null){
+            if(this.cliente.getEmail() == null ? email == null : this.cliente.getEmail().equals(email)){
+                HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                sessao.setAttribute("cliente", cliente);
+                return "home.xhtml?faces-redirect=true";
+            }
         }
         this.mensagem = "login inexistente";
         this.cliente = new Cliente();
@@ -72,6 +75,11 @@ public class ClienteControlador implements Serializable{
     public String cadastrar(){
         Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, this.cliente.getNome());
         Logger.getLogger(CardCredit.class.getName()).log(Level.INFO, this.cliente.getEmail());
+        Cliente cliente = cr.buscarPorNome(this.cliente.getNome());
+        if(cliente != null){
+            this.mensagem = "Nome ja exite";
+            return "index.xhtml?faces-redirect=true";
+        }
         cr.add(this.cliente);
         this.mensagem = "cadastro realizado com susseso";
         this.cliente = new Cliente();

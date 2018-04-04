@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import edu.ifpb.dac.recebimento.CardCredit;
+import edu.ifpb.dac.jms.CardCredit;
 
 
 /**
